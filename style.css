@@ -1,0 +1,65 @@
+body { 
+  background-color: #f8fafc; 
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #334155;
+}
+
+/* Navbar & Logo */
+.header-logo { max-height: 45px; object-fit: contain; }
+.badge-system { background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+/* Cards Setup */
+.main-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+.card-rekap { 
+  border-radius: 16px;
+  border: 1px solid transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #ffffff;
+}
+.card-rekap:hover { transform: translateY(-3px); }
+
+.rekap-masuk { border-bottom: 4px solid #10b981; box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1); }
+.rekap-keluar { border-bottom: 4px solid #ef4444; box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.1); }
+.rekap-saldo { border-bottom: 4px solid #0d6efd; box-shadow: 0 10px 15px -3px rgba(13, 110, 253, 0.1); }
+
+.icon-box {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 1.1rem;
+}
+
+/* Form & Input */
+.form-label-custom { font-weight: 600; font-size: 13px; color: #475569; margin-bottom: 0.4rem; }
+.custom-input { border-radius: 8px; border-color: #cbd5e1; padding: 0.6rem 0.8rem; font-size: 14px; }
+.custom-input:focus, .input-group:focus-within .input-group-text {
+  border-color: #10b981;
+  box-shadow: 0 0 0 0.25rem rgba(16, 185, 129, 0.15);
+}
+
+/* Tables */
+.table th { font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; padding: 14px 16px; color:#64748b; border-bottom: 1px solid #e2e8f0; }
+.table td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+
+.col-tanggal { width: 15%; min-width: 100px; }
+.col-rincian { width: 35%; min-width: 180px; word-break: break-word; }
+.col-nominal { width: 18%; min-width: 120px; }
+.col-pj { width: 14%; min-width: 100px; }
+.col-saldo { width: 18%; min-width: 120px; }
+
+/* Badges */
+.badge-nominal { font-weight: 700; padding: 5px 12px; border-radius: 8px; display: inline-block; font-size: 13px; }
+.badge-nominal-masuk { color: #059669; background-color: #d1fae5; }
+.badge-nominal-keluar { color: #dc2626; background-color: #fee2e2; }
+.badge-nominal-netral { color: #475569; background-color: #f1f5f9; }
+
+/* Alerts */
+.custom-alert { display: none; border-radius: 10px; font-weight: 500; font-size: 14px; padding: 12px 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
