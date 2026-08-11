@@ -35,7 +35,7 @@ function formatRupiahInput(input) {
 function tampilkanNotifikasi(pesan, tipe = "success") {
   var alertBox = document.getElementById('appAlert');
   alertBox.className = "custom-alert alert alert-" + (tipe === "success" ? "success" : "danger");
-  alertBox.innerHTML = (tipe === "success" ? "<i class='fa-solid fa-circle-check me-2'></i>" : "<i class='fa-solid fa-triangle-exclamation me-2'></i>") + pesan;
+  alertBox.innerHTML = (tipe === "success" ? "<i class='fa-solid fa-check-circle me-2'></i>" : "<i class='fa-solid fa-triangle-exclamation me-2'></i>") + pesan;
   alertBox.style.display = "block";
   setTimeout(() => alertBox.style.display = "none", 4000);
 }
@@ -71,7 +71,7 @@ function renderTabel() {
   var container = document.getElementById('tabelRiwayat');
   
   if (semuaDataRiwayat.length === 0) {
-    container.innerHTML = "<tr><td colspan='5' class='text-center py-5 text-muted'><i class='fa-regular fa-folder-open mb-2 d-block fa-2x opacity-50'></i>Belum ada data transaksi tercatat.</td></tr>";
+    container.innerHTML = "<tr><td colspan='5' class='text-center py-5 text-muted'><i class='fa-regular fa-folder-open mb-2 d-block fa-2x'></i>Belum ada data transaksi tercatat.</td></tr>";
     document.getElementById('btnLoadMore').style.display = "none";
     document.getElementById('txtInfoData').innerText = "";
     return;
@@ -83,11 +83,11 @@ function renderTabel() {
     var cellNominal = `<span class="badge-nominal ${classBadge}">${row.nominal}</span>`;
     
     return `<tr>
-      <td data-label="Tanggal" class="text-secondary small">${row.tanggal}</td>
-      <td data-label="Rincian" class="fw-semibold text-dark">${row.rincian}</td>
-      <td data-label="Nominal">${cellNominal}</td>
-      <td data-label="PJ" class="text-muted small"><i class="fa-regular fa-user me-1 text-opacity-50"></i>${row.pj}</td>
-      <td data-label="Saldo" class="fw-bold text-dark">${row.saldo}</td>
+      <td class="text-secondary small px-4">${row.tanggal}</td>
+      <td class="fw-semibold text-dark">${row.rincian}</td>
+      <td>${cellNominal}</td>
+      <td class="text-muted small"><i class="fa-regular fa-user me-1"></i>${row.pj}</td>
+      <td class="fw-bold text-dark px-4">${row.saldo}</td>
     </tr>`;
   }).join("");
 
@@ -117,11 +117,11 @@ function filterTabel() {
   }).map(row => {
     var classBadge = row.jenis === "masuk" ? "badge-nominal-masuk" : (row.jenis === "keluar" ? "badge-nominal-keluar" : "badge-nominal-netral");
     return `<tr>
-      <td data-label="Tanggal" class="text-secondary small">${row.tanggal}</td>
-      <td data-label="Rincian" class="fw-semibold text-dark">${row.rincian}</td>
-      <td data-label="Nominal"><span class="badge-nominal ${classBadge}">${row.nominal}</span></td>
-      <td data-label="PJ" class="text-muted small"><i class="fa-regular fa-user me-1"></i>${row.pj}</td>
-      <td data-label="Saldo" class="fw-bold text-dark">${row.saldo}</td>
+      <td class="text-secondary small px-4">${row.tanggal}</td>
+      <td class="fw-semibold text-dark">${row.rincian}</td>
+      <td><span class="badge-nominal ${classBadge}">${row.nominal}</span></td>
+      <td class="text-muted small"><i class="fa-regular fa-user me-1"></i>${row.pj}</td>
+      <td class="fw-bold text-dark px-4">${row.saldo}</td>
     </tr>`;
   }).join("");
   
