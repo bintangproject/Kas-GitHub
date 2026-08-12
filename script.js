@@ -26,8 +26,12 @@ var jumlahDataDitampilkan = 10;
 window.onload = function() {
   muatRekapData();
   
+  // Set default tanggal hari ini saat pertama buka
   var today = new Date().toISOString().split('T')[0];
-  document.getElementById('tanggal').value = today;
+  var elTanggal = document.getElementById('tanggal');
+  if (elTanggal) {
+    elTanggal.value = today;
+  }
 };
 
 function formatRupiahInput(input) {
@@ -132,8 +136,13 @@ function filterTabel() {
 }
 
 async function submitForm() {
+  var now = new Date();
+  // Mengambil jam, menit, detik saat ini (format HH:mm:ss)
+  var jamSekarang = now.toTimeString().split(' ')[0];
+
   var data = {
-    tanggal: document.getElementById('tanggal').value, // <-- Tambahkan baris ini
+    tanggal: document.getElementById('tanggal').value, 
+    jam: jamSekarang, // Mengirimkan jam real-time saat klik simpan
     jenis: document.getElementById('jenis').value,
     jumlah: document.getElementById('jumlah').value, 
     rincian: document.getElementById('rincian').value,
@@ -141,7 +150,7 @@ async function submitForm() {
     keterangan: document.getElementById('keterangan').value
   };
 
-  // Tambahkan validasi tanggal (!data.tanggal)
+  // Mandatory check untuk tanggal, nominal, rincian, dan PJ
   if(!data.tanggal || !data.jumlah || !data.rincian || !data.pj) {
     return tampilkanNotifikasi("Mohon lengkapi tanggal, nominal, rincian, dan PJ!", "danger");
   }
@@ -151,7 +160,13 @@ async function submitForm() {
   try {
     const response = await fetchServer('simpanTransaksasi', data);
     tampilkanNotifikasi(response.message, "success");
+    
     document.getElementById('formKas').reset();
+    
+    // Setel ulang input tanggal ke hari ini setelah form di-reset
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById('tanggal').value = today;
+
     muatRekapData(); 
   } catch (error) {
     tampilkanNotifikasi("Gagal: " + error.message, "danger");
