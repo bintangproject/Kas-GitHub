@@ -11,7 +11,7 @@
     <meta property="og:title" content="Kas Digital Pesantren">
     <meta property="og:description" content="Sistem Pencatatan Uang Digital">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://i.ibb.co.com/F9HrznH/Excel.png">
+    <meta property="og:image" content="https://i.ibb.co.com/rfFcng6g/Kas-Digital.png">
 
     <!-- Memuat CSS dari Framework & Font Eksternal -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg bg-white shadow-sm mb-4 py-3">
       <div class="container-fluid px-md-5">
         <div class="d-flex align-items-center">
-          <img src="https://i.ibb.co.com/F9HrznH/Excel.png" alt="Logo Pesantren" class="header-logo me-3">
+          <img src="https://i.ibb.co.com/rfFcng6g/Kas-Digital.png" alt="Logo Pesantren" class="header-logo me-3">
           <div>
             <h4 class="fw-bold text-success mb-0">Dashboard Keuangan</h4>
             <p class="text-muted small mb-0">Pondok Pesantren Darul Fawaid Ilmiyah</p>
@@ -52,6 +52,11 @@
             <div class="card-body p-4">
               <form id="formKas">
                 <div class="mb-3">
+                  <label class="form-label form-label-custom">Tanggal Transaksi</label>
+                  <input type="date" class="form-control custom-input" id="tanggal" required>
+                </div>
+                
+                <div class="mb-3">
                   <label class="form-label form-label-custom">Jenis Transaksi</label>
                   <select class="form-select custom-input" id="jenis" required>
                     <option value="masuk">Pemasukan (+)</option>
@@ -69,7 +74,7 @@
 
                 <div class="mb-3">
                   <label class="form-label form-label-custom">Rincian Transaksi</label>
-                  <textarea class="form-control custom-input" id="rincian" rows="2" placeholder="Contoh: Konsumsi Rapat / Pembayaran SPP" required></textarea>
+                  <textarea class="form-control custom-input" id="rincian" rows="2" placeholder="Contoh: Pembayaran SPP / Konsumsi Rapat" required></textarea>
                 </div>
 
                 <div class="mb-3">
