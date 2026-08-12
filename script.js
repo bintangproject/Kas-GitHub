@@ -25,6 +25,9 @@ var jumlahDataDitampilkan = 10;
 
 window.onload = function() {
   muatRekapData();
+  
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById('tanggal').value = today;
 };
 
 function formatRupiahInput(input) {
@@ -130,6 +133,7 @@ function filterTabel() {
 
 async function submitForm() {
   var data = {
+    tanggal: document.getElementById('tanggal').value, // <-- Tambahkan baris ini
     jenis: document.getElementById('jenis').value,
     jumlah: document.getElementById('jumlah').value, 
     rincian: document.getElementById('rincian').value,
@@ -137,8 +141,9 @@ async function submitForm() {
     keterangan: document.getElementById('keterangan').value
   };
 
-  if(!data.jumlah || !data.rincian || !data.pj) {
-    return tampilkanNotifikasi("Mohon lengkapi nominal, rincian, dan PJ!", "danger");
+  // Tambahkan validasi tanggal (!data.tanggal)
+  if(!data.tanggal || !data.jumlah || !data.rincian || !data.pj) {
+    return tampilkanNotifikasi("Mohon lengkapi tanggal, nominal, rincian, dan PJ!", "danger");
   }
 
   toggleLoadingButton(true);
