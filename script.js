@@ -1,27 +1,20 @@
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUd2C4ViGifq1vrsrb289YJrneXbDSZIeILPLdODsGUQc9stAkW3c81olii9CVIoOs/exec";
 
-// Fungsi Penghubung (API Bridge) ke Google Apps Script
-async function fetchServer(action, payload = {}) {
-  try {
-  const response = await fetchServer('simpanTransaksasi', data);
-  
-  // Menggunakan teks langsung agar pasti muncul tulisan yang benar
-  tampilkanNotifikasi("Transaksi berhasil disimpan di buku kas!", "success");
-  
-  document.getElementById('formKas').reset();
-  
-  // Setel ulang input tanggal ke hari ini setelah reset
-  var today = new Date().toISOString().split('T')[0];
-  var elTanggal = document.getElementById('tanggal');
-  if (elTanggal) elTanggal.value = today;
-
-  muatRekapData(); 
-} catch (error) {
-  tampilkanNotifikasi("Gagal: " + error.message, "danger");
-}
-
 var semuaDataRiwayat = []; 
 var jumlahDataDitampilkan = 10; 
+
+// Fungsi Penghubung (API Bridge) ke Google Apps Script
+async function fetchServer(action, payload = {}) {
+  const response = await fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: JSON.stringify({ action: action, payload: payload })
+  });
+  const result = await response.json();
+  if (result.status === 'error') {
+    throw new Error(result.message);
+  }
+  return result;
+}
 
 window.onload = function() {
   muatRekapData();
@@ -143,12 +136,11 @@ function filterTabel() {
 
 async function submitForm() {
   var now = new Date();
-  // Mengambil jam, menit, detik saat ini (format HH:mm:ss)
   var jamSekarang = now.toTimeString().split(' ')[0];
 
   var data = {
     tanggal: document.getElementById('tanggal').value, 
-    jam: jamSekarang, // Mengirimkan jam real-time saat klik simpan
+    jam: jamSekarang,
     jenis: document.getElementById('jenis').value,
     jumlah: document.getElementById('jumlah').value, 
     rincian: document.getElementById('rincian').value,
@@ -156,7 +148,6 @@ async function submitForm() {
     keterangan: document.getElementById('keterangan').value
   };
 
-  // Mandatory check untuk tanggal, nominal, rincian, dan PJ
   if(!data.tanggal || !data.jumlah || !data.rincian || !data.pj) {
     return tampilkanNotifikasi("Mohon lengkapi tanggal, nominal, rincian, dan PJ!", "danger");
   }
@@ -165,11 +156,13 @@ async function submitForm() {
 
   try {
     const response = await fetchServer('simpanTransaksasi', data);
-    tampilkanNotifikasi(response.message, "success");
+    
+    // Perbaikan: Ambil string teks pesan (bukan objek)
+    var pesanSukses = (typeof response.message === 'string') ? response.message : "Transaksi berhasil disimpan di buku kas!";
+    tampilkanNotifikasi(pesanSukses, "success");
     
     document.getElementById('formKas').reset();
     
-    // Setel ulang input tanggal ke hari ini setelah form di-reset
     var today = new Date().toISOString().split('T')[0];
     document.getElementById('tanggal').value = today;
 
