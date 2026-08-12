@@ -89,8 +89,14 @@ function renderTabel() {
     var classBadge = tipe === "masuk" ? "badge-nominal-masuk" : (tipe === "keluar" ? "badge-nominal-keluar" : "badge-nominal-netral");
     var cellNominal = `<span class="badge-nominal ${classBadge}">${row.nominal}</span>`;
     
+    // Memisah tanggal dan jam jika dikirim berjarak spasi dari server
+    var tglFormatted = row.tanggal.replace(" ", "<br><small class='text-muted'>");
+    if(row.tanggal.includes(" ")) {
+      tglFormatted += "</small>";
+    }
+    
     return `<tr>
-      <td class="text-secondary small px-4">${row.tanggal}</td>
+      <td class="text-secondary small px-4">${tglFormatted}</td>
       <td class="fw-semibold text-dark">${row.rincian}</td>
       <td>${cellNominal}</td>
       <td class="text-muted small"><i class="fa-regular fa-user me-1"></i>${row.pj}</td>
