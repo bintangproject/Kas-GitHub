@@ -3,21 +3,21 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUd2C4ViGifq1vrsrb2
 // Fungsi Penghubung (API Bridge) ke Google Apps Script
 async function fetchServer(action, payload = {}) {
   try {
-    const response = await fetch(SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ action: action, payload: payload })
-    });
-    
-    const result = await response.json();
-    if (result.status === 'success') {
-      return result;
-    } else {
-      throw new Error(result.message);
-    }
-  } catch (error) {
-    throw error;
-  }
+  const response = await fetchServer('simpanTransaksasi', data);
+  
+  // Menggunakan teks langsung agar pasti muncul tulisan yang benar
+  tampilkanNotifikasi("Transaksi berhasil disimpan di buku kas!", "success");
+  
+  document.getElementById('formKas').reset();
+  
+  // Setel ulang input tanggal ke hari ini setelah reset
+  var today = new Date().toISOString().split('T')[0];
+  var elTanggal = document.getElementById('tanggal');
+  if (elTanggal) elTanggal.value = today;
+
+  muatRekapData(); 
+} catch (error) {
+  tampilkanNotifikasi("Gagal: " + error.message, "danger");
 }
 
 var semuaDataRiwayat = []; 
