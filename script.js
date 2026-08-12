@@ -158,7 +158,7 @@ async function submitForm() {
     const response = await fetchServer('simpanTransaksasi', data);
     
     // Perbaikan: Ambil string teks pesan (bukan objek)
-    var pesanSukses = (typeof response.message === 'string') ? response.message : "Transaksi berhasil disimpan di buku kas!";
+    var pesanSukses = (typeof response.message === 'string') ? response.message : "Transaksi berhasil disimpan!";
     tampilkanNotifikasi(pesanSukses, "success");
     
     document.getElementById('formKas').reset();
