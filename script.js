@@ -93,7 +93,7 @@ function renderTabel() {
       <td class="fw-semibold text-dark">${row.rincian}</td>
       <td>${cellNominal}</td>
       <td class="text-muted small"><i class="fa-regular fa-user me-1"></i>${row.pj}</td>
-      <td class="fw-bold text-dark px-4">${row.saldo}</td>
+      <td class="fw-bold text-dark px-4">Rp ${row.saldo}</td>
     </tr>`;
   }).join("");
 
@@ -127,7 +127,7 @@ function filterTabel() {
       <td class="fw-semibold text-dark">${row.rincian}</td>
       <td><span class="badge-nominal ${classBadge}">${row.nominal}</span></td>
       <td class="text-muted small"><i class="fa-regular fa-user me-1"></i>${row.pj}</td>
-      <td class="fw-bold text-dark px-4">${row.saldo}</td>
+      <td class="fw-bold text-dark px-4">Rp ${row.saldo}</td>
     </tr>`;
   }).join("");
   
@@ -157,7 +157,6 @@ async function submitForm() {
   try {
     const response = await fetchServer('simpanTransaksasi', data);
     
-    // Perbaikan: Ambil string teks pesan (bukan objek)
     var pesanSukses = (typeof response.message === 'string') ? response.message : "Transaksi berhasil disimpan!";
     tampilkanNotifikasi(pesanSukses, "success");
     
